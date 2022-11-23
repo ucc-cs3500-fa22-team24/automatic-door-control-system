@@ -13,7 +13,7 @@ class InfraredSensor(Sensor):
         return self._has_presence
 
     @has_presence.setter
-    def has_presence(self, value):
+    def has_presence(self, value: bool):
         self._has_presence = value
 
     def deactivate(self):

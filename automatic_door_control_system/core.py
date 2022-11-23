@@ -1,18 +1,27 @@
 from time import time
+from typing import Optional
 
 from activatable import Activatable
-from door import DoorState
-from motion_sensor import Motion
+from infrared_sensor import InfraredSensor
+from door import DoorState, Door
+from motion_sensor import Motion, MotionSensor
+from physical_resistance_sensor import PhysicalResistanceSensor
 
 
 class Controller(Activatable):
-    def __init__(self, door, motion_sensor, infrared_sensor, physical_resistance_sensor):
+    def __init__(
+        self,
+        door: Door,
+        motion_sensor: MotionSensor,
+        infrared_sensor: InfraredSensor,
+        physical_resistance_sensor: PhysicalResistanceSensor,
+    ):
         super().__init__()
         self._door = door
         self._motion_sensor = motion_sensor
         self._infrared_sensor = infrared_sensor
         self._physical_resistance_sensor = physical_resistance_sensor
-        self._start_clear_time = None
+        self._start_clear_time: Optional[float] = None
 
     @property
     def door_state(self):

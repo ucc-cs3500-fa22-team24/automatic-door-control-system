@@ -13,7 +13,7 @@ class PhysicalResistanceSensor(Sensor):
         return self._is_blocked
 
     @is_blocked.setter
-    def is_blocked(self, value):
+    def is_blocked(self, value: bool):
         self._is_blocked = value
 
     def deactivate(self):

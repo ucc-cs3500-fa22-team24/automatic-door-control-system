@@ -1,5 +1,6 @@
 import asyncio
 from enum import Enum
+from typing import Optional
 
 from activatable import Activatable
 
@@ -16,14 +17,14 @@ class Door(Activatable):
         super().__init__()
         self._open_close_time = open_close_time
         self._state = DoorState.CLOSED
-        self._task = None
+        self._task: Optional[asyncio.Task] = None
 
     @property
     def state(self):
         return self._state
 
     @state.setter
-    def state(self, value):
+    def state(self, value: DoorState):
         self._state = value
 
     async def _create_open_coroutine(self):

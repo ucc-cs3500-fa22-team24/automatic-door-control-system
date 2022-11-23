@@ -21,7 +21,7 @@ class MotionSensor(Sensor):
         return self._detected_motion
 
     @detected_motion.setter
-    def detected_motion(self, motion):
+    def detected_motion(self, motion: Motion):
         self._detected_motion = motion
 
     def deactivate(self):
