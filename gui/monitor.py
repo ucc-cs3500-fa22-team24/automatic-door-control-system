@@ -33,6 +33,13 @@ class Monitor:
         )
         physical_resistance_sensor_state_label.pack()
 
+    @property
+    def is_closed(self):
+        try:
+            return self._root.state() == "withdrawn"
+        except tk.TclError:
+            return True
+
     def update(self):
         self._door_state.set(self._controller.door)
         self._motion_sensor_states.set(self._controller.motion_sensor)
@@ -40,6 +47,5 @@ class Monitor:
         self._physical_resistance_sensor_state.set(self._controller.physical_resistance_sensor)
         self._root.update()
 
-    @property
-    def is_closed(self):
-        return self._root.state() == "withdrawn"
+    def destroy(self):
+        self._root.destroy()

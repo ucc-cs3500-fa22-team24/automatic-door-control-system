@@ -30,6 +30,13 @@ class Simulator:
         unblock_door_button = tk.Button(self._root, text="Unblock door", command=self._unblock_door)
         unblock_door_button.pack()
 
+    @property
+    def is_closed(self):
+        try:
+            return self._root.state() == "withdrawn"
+        except tk.TclError:
+            return True
+
     def _approach(self):
         self._controller.motion_sensor.detected_motion = Motion.APPROACHING
 
@@ -51,6 +58,5 @@ class Simulator:
     def update(self):
         self._root.update()
 
-    @property
-    def is_closed(self):
-        return self._root.state() == "withdrawn"
+    def destroy(self):
+        self._root.destroy()

@@ -25,13 +25,10 @@ async def main():
         if monitor.is_closed or simulator.is_closed:
             break
         await asyncio.sleep(0.1)
-        simulator.update()
         controller.update()
+        simulator.update()
         monitor.update()
 
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except Exception:
-        pass
+    asyncio.run(main())
