@@ -2,7 +2,7 @@ import asyncio
 from enum import Enum
 from typing import Optional
 
-from activatable import Activatable
+from .activatable import Activatable
 
 
 class DoorState(Enum):

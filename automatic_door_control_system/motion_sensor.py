@@ -1,6 +1,6 @@
 from enum import Enum
 
-from sensor import Sensor
+from .sensor import Sensor
 
 
 class Motion(Enum):
