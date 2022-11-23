@@ -19,3 +19,6 @@ class InfraredSensor(Sensor):
     def deactivate(self):
         self.has_presence = False
         return super().deactivate()
+
+    def __str__(self):
+        return f"{self.name}: ({'Has presence' if self.has_presence else 'No presence'})"

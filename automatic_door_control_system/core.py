@@ -24,20 +24,20 @@ class Controller(Activatable):
         self._start_clear_time: Optional[float] = None
 
     @property
-    def door_state(self):
-        return self._door.state
+    def door(self):
+        return self._door
 
     @property
-    def motion_sensor_state(self):
-        return self._motion_sensor.detected_motion
+    def motion_sensor(self):
+        return self._motion_sensor
 
     @property
-    def infrared_sensor_state(self):
-        return self._infrared_sensor.has_presence
+    def infrared_sensor(self):
+        return self._infrared_sensor
 
     @property
-    def physical_resistance_sensor_state(self):
-        return self._physical_resistance_sensor.is_blocked
+    def physical_resistance_sensor(self):
+        return self._physical_resistance_sensor
 
     def update(self):
         if not self.is_active:

@@ -46,3 +46,6 @@ class Door(Activatable):
         if self._task is not None:
             self._task.cancel()
         self._task = asyncio.create_task(self._create_close_coroutine())
+
+    def __str__(self):
+        return f"Door: ({self.state.name})"

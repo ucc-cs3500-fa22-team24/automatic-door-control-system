@@ -19,3 +19,6 @@ class PhysicalResistanceSensor(Sensor):
     def deactivate(self):
         self.is_blocked = False
         return super().deactivate()
+
+    def __str__(self):
+        return f"{self.name}: ({'Blocked' if self.is_blocked else 'Not Blocked'})"

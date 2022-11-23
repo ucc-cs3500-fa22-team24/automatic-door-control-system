@@ -27,3 +27,6 @@ class MotionSensor(Sensor):
     def deactivate(self):
         self.detected_motion = Motion.NONE
         return super().deactivate()
+
+    def __str__(self):
+        return f"{self.name}: ({self.detected_motion.name})"
