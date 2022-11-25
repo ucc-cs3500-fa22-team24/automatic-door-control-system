@@ -2,8 +2,8 @@ from time import time
 from typing import Optional
 
 from .activatable import Activatable
-from .infrared_sensor import InfraredSensor
 from .door import DoorState, Door
+from .infrared_sensor import InfraredSensor
 from .motion_sensor import Motion, MotionSensor
 from .physical_resistance_sensor import PhysicalResistanceSensor
 

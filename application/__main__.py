@@ -1,11 +1,10 @@
 import asyncio
 
-from automatic_door_control_system.door import Door
-from automatic_door_control_system.motion_sensor import MotionSensor
-from automatic_door_control_system.infrared_sensor import InfraredSensor
-from automatic_door_control_system.physical_resistance_sensor import PhysicalResistanceSensor
 from automatic_door_control_system.core import Controller
-
+from automatic_door_control_system.door import Door
+from automatic_door_control_system.infrared_sensor import InfraredSensor
+from automatic_door_control_system.motion_sensor import MotionSensor
+from automatic_door_control_system.physical_resistance_sensor import PhysicalResistanceSensor
 from gui.monitor import Monitor
 from gui.simulator import Simulator
 

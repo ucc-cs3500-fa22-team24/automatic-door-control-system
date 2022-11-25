@@ -1,10 +1,10 @@
 import unittest
 
-from automatic_door_control_system.door import Door, DoorState
-from automatic_door_control_system.motion_sensor import MotionSensor, Motion
-from automatic_door_control_system.infrared_sensor import InfraredSensor
-from automatic_door_control_system.physical_resistance_sensor import PhysicalResistanceSensor
 from automatic_door_control_system.core import Controller
+from automatic_door_control_system.door import Door, DoorState
+from automatic_door_control_system.infrared_sensor import InfraredSensor
+from automatic_door_control_system.motion_sensor import MotionSensor, Motion
+from automatic_door_control_system.physical_resistance_sensor import PhysicalResistanceSensor
 
 
 # FIXME asyncio issue
@@ -38,6 +38,6 @@ class TestController(unittest.TestCase):
         physical_resistance_sensor = PhysicalResistanceSensor()
         controller = Controller(door, motion_sensor, infrared_sensor, physical_resistance_sensor)
         controller.door.state = DoorState.OPEN
-        controller._start_clear_time = 0
+        controller._doorway_clear_start_time = 0
         controller.update()
         self.assertEqual(controller.door.state, DoorState.CLOSING)

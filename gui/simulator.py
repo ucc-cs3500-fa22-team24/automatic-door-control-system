@@ -1,7 +1,6 @@
-from automatic_door_control_system.core import Controller
-
 import tkinter as tk
 
+from automatic_door_control_system.core import Controller
 from automatic_door_control_system.motion_sensor import Motion
 
 
