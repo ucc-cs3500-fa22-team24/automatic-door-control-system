@@ -9,6 +9,8 @@ from .physical_resistance_sensor import PhysicalResistanceSensor
 
 
 class Controller(Activatable):
+    DOORWAY_CLEAR_TIME = 4
+
     def __init__(
         self,
         door: Door,
@@ -21,7 +23,7 @@ class Controller(Activatable):
         self._motion_sensor = motion_sensor
         self._infrared_sensor = infrared_sensor
         self._physical_resistance_sensor = physical_resistance_sensor
-        self._start_clear_time: Optional[float] = None
+        self._doorway_clear_start_time: Optional[float] = None
 
     @property
     def door(self):
@@ -49,15 +51,15 @@ class Controller(Activatable):
             self._door.open()
         # door is open
         elif self._door.state == DoorState.OPEN and (
-            self._motion_sensor.detected_motion != Motion.APPROACHING
+            not self._motion_sensor.detected_motion == Motion.APPROACHING
             and not self._infrared_sensor.has_presence
         ):
-            if self._start_clear_time is None:
-                self._start_clear_time = time()
+            if self._doorway_clear_start_time is None:
+                self._doorway_clear_start_time = time()
             else:
-                if time() - self._start_clear_time > 4:
+                if time() - self._doorway_clear_start_time > self.DOORWAY_CLEAR_TIME:
                     self._door.close()
-                    self._start_clear_time = None
+                    self._doorway_clear_start_time = None
         # door is closing
         elif self._door.state == DoorState.CLOSING and (
             self._motion_sensor.detected_motion == Motion.APPROACHING
