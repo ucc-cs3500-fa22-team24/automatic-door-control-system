@@ -19,9 +19,7 @@ class Simulator:
         # display a button to change infrared sensor
         place_object_button = tk.Button(self._root, text="Place object", command=self._place_object)
         place_object_button.pack()
-        remove_object_button = tk.Button(
-            self._root, text="Remove object", command=self._remove_object
-        )
+        remove_object_button = tk.Button(self._root, text="Remove object", command=self._remove_object)
         remove_object_button.pack()
         # display a button to change physical resistance sensor
         block_door_button = tk.Button(self._root, text="Block door", command=self._block_door)

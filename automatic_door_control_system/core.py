@@ -42,6 +42,7 @@ class Controller(Activatable):
         return self._physical_resistance_sensor
 
     def update(self):
+        # fmt: off
         if not self.is_active:
             return
         # door is closed
@@ -67,6 +68,7 @@ class Controller(Activatable):
             or self._physical_resistance_sensor.is_blocked
         ):
             self._door.open()
+        # fmt: on
 
     def deactivate(self):
         self._door.deactivate()
