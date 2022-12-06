@@ -14,7 +14,9 @@ class DoorState(Enum):
 
 
 class Door(Activatable):
-    def __init__(self, open_close_time=2):
+    DEFAULT_OPEN_CLOSE_TIME = 2
+
+    def __init__(self, open_close_time=DEFAULT_OPEN_CLOSE_TIME):
         super().__init__()
         self._open_close_time = open_close_time
         self._state = DoorState.CLOSED
