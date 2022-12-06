@@ -9,6 +9,8 @@ from automatic_door_control_system.physical_resistance_sensor import PhysicalRes
 
 
 class TestController(unittest.IsolatedAsyncioTestCase):
+    DOOR_OPEN_CLOSE_TIME = 1
+
     async def test_controller(self):
         door = Door()
         motion_sensor = MotionSensor()
@@ -21,7 +23,7 @@ class TestController(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(False, controller.physical_resistance_sensor.is_blocked)
 
     async def test_controller_open_door(self):
-        door = Door()
+        door = Door(open_close_time=self.DOOR_OPEN_CLOSE_TIME)
         motion_sensor = MotionSensor()
         infrared_sensor = InfraredSensor()
         physical_resistance_sensor = PhysicalResistanceSensor()
@@ -31,11 +33,11 @@ class TestController(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(0)
         self.assertEqual(DoorState.OPENING, controller.door.state)
         self.assertEqual(Motion.APPROACHING, controller.motion_sensor.detected_motion)
-        await asyncio.sleep(Door.DEFAULT_OPEN_CLOSE_TIME)
+        await asyncio.sleep(self.DOOR_OPEN_CLOSE_TIME)
         self.assertEqual(DoorState.OPEN, controller.door.state)
 
     async def test_controller_close_door(self):
-        door = Door()
+        door = Door(open_close_time=self.DOOR_OPEN_CLOSE_TIME)
         motion_sensor = MotionSensor()
         infrared_sensor = InfraredSensor()
         physical_resistance_sensor = PhysicalResistanceSensor()
@@ -45,5 +47,5 @@ class TestController(unittest.IsolatedAsyncioTestCase):
         controller.update()
         await asyncio.sleep(0)
         self.assertEqual(DoorState.CLOSING, controller.door.state)
-        await asyncio.sleep(Door.DEFAULT_OPEN_CLOSE_TIME)
+        await asyncio.sleep(self.DOOR_OPEN_CLOSE_TIME)
         self.assertEqual(DoorState.CLOSED, controller.door.state)
