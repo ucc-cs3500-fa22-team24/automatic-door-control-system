@@ -8,7 +8,7 @@ from automatic_door_control_system.physical_resistance_sensor import PhysicalRes
 from gui.monitor import Monitor
 from gui.simulator import Simulator
 
-door = Door()
+door = Door(open_close_time=4)
 motion_sensor = MotionSensor()
 infrared_sensor = InfraredSensor()
 physical_resistance_sensor = PhysicalResistanceSensor()
@@ -23,7 +23,7 @@ async def main():
     while True:
         if monitor.is_closed or simulator.is_closed:
             break
-        await asyncio.sleep(0.1)
+        await asyncio.sleep(1 / 120)
         controller.update()
         simulator.update()
         monitor.update()
