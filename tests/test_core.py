@@ -31,6 +31,8 @@ class TestController(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(0)
         self.assertEqual(DoorState.OPENING, controller.door.state)
         self.assertEqual(Motion.APPROACHING, controller.motion_sensor.detected_motion)
+        await asyncio.sleep(Door.DEFAULT_OPEN_CLOSE_TIME)
+        self.assertEqual(DoorState.OPEN, controller.door.state)
 
     async def test_controller_close_door(self):
         door = Door()
@@ -43,3 +45,5 @@ class TestController(unittest.IsolatedAsyncioTestCase):
         controller.update()
         await asyncio.sleep(0)
         self.assertEqual(DoorState.CLOSING, controller.door.state)
+        await asyncio.sleep(Door.DEFAULT_OPEN_CLOSE_TIME)
+        self.assertEqual(DoorState.CLOSED, controller.door.state)
