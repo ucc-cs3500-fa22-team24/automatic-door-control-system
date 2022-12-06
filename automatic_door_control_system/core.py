@@ -51,16 +51,19 @@ class Controller(Activatable):
         ):
             self._door.open()
         # door is open
-        elif self._door.state == DoorState.OPEN and (
-            not self._motion_sensor.detected_motion == Motion.APPROACHING
-            and not self._infrared_sensor.has_presence
-        ):
-            if self._doorway_clear_start_time is None:
-                self._doorway_clear_start_time = time()
+        elif self._door.state == DoorState.OPEN:
+            if (
+                not self._motion_sensor.detected_motion == Motion.APPROACHING
+                and not self._infrared_sensor.has_presence
+            ):
+                if self._doorway_clear_start_time is None:
+                    self._doorway_clear_start_time = time()
+                else:
+                    if time() - self._doorway_clear_start_time > self.DOORWAY_CLEAR_TIME:
+                        self._door.close()
+                        self._doorway_clear_start_time = None
             else:
-                if time() - self._doorway_clear_start_time > self.DOORWAY_CLEAR_TIME:
-                    self._door.close()
-                    self._doorway_clear_start_time = None
+                self._doorway_clear_start_time = None
         # door is closing
         elif self._door.state == DoorState.CLOSING and (
             self._motion_sensor.detected_motion == Motion.APPROACHING
